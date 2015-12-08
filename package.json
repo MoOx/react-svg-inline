@@ -1,6 +1,6 @@
 {
   "name": "react-svg-inline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React component to inline your SVGs.",
   "keywords": [
     "react",
@@ -11,6 +11,7 @@
   "author": "Maxime Thirouin",
   "license": "MIT",
   "repository": "https://github.com/MoOx/react-svg-inline.git",
+  "main": "lib/index.js",
   "files": [
     "lib",
     "src",
