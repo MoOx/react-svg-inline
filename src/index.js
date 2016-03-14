@@ -25,42 +25,7 @@ const cleanups = {
 }
 
 // @styled(styles)
-export default class SVGInline extends Component {
-
-  static propTypes = {
-    className: PropTypes.string,
-    classSuffix: PropTypes.string,
-    component: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.func,
-    ]),
-    svg: PropTypes.string.isRequired,
-    fill: PropTypes.string,
-    cleanup: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.array,
-    ]),
-    cleanupExceptions: PropTypes.array,
-    width: PropTypes.string,
-    height: PropTypes.string,
-  }
-
-  static defaultProps = {
-    component: "span",
-    classSuffix: "-svg",
-    cleanup: [],
-    cleanupExceptions: [],
-  }
-
-  static cleanupSvg(svg, cleanup = []) {
-    return Object.keys(cleanups)
-      .filter(key => cleanup.includes(key))
-      .reduce((acc, key) => {
-        return acc.replace(cleanups[key], "")
-      }, svg)
-      .trim()
-  }
-
+class SVGInline extends Component {
   render() {
     const {
       className,
@@ -83,7 +48,7 @@ export default class SVGInline extends Component {
     }
     cleanup = cleanup.filter(
       key => {
-        return !this.props.cleanupExceptions.includes(key)
+        return !(this.props.cleanupExceptions.indexOf(key) > -1)
       }
     )
 
@@ -123,14 +88,14 @@ export default class SVGInline extends Component {
               (
                 fill
                 ? ` fill="${ fill }"`
-                : ``
+                : ""
               ) +
               (
                 width || height
-                ? ` style="` +
-                    (width ? `width: ${width};` : ``) +
-                    (height ? `height: ${height};` : ``) +
-                  `"`
+                ? " style=\"" +
+                    (width ? `width: ${width};` : "") +
+                    (height ? `height: ${height};` : "") +
+                  "\""
                 : ""
               )
             ),
@@ -140,3 +105,39 @@ export default class SVGInline extends Component {
     )
   }
 }
+
+SVGInline.propTypes = {
+  className: PropTypes.string,
+  classSuffix: PropTypes.string,
+  component: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.func,
+  ]),
+  svg: PropTypes.string.isRequired,
+  fill: PropTypes.string,
+  cleanup: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.array,
+  ]),
+  cleanupExceptions: PropTypes.array,
+  width: PropTypes.string,
+  height: PropTypes.string,
+}
+
+SVGInline.defaultProps = {
+  component: "span",
+  classSuffix: "-svg",
+  cleanup: [],
+  cleanupExceptions: [],
+}
+
+SVGInline.cleanupSvg = (svg, cleanup = []) => {
+  return Object.keys(cleanups)
+    .filter(key => cleanup.indexOf(key) > -1)
+    .reduce((acc, key) => {
+      return acc.replace(cleanups[key], "")
+    }, svg)
+    .trim()
+}
+
+export default SVGInline
