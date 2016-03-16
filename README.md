@@ -1,6 +1,6 @@
 # react-svg-inline
 
-> A react component to clean an display raw SVGs.
+> A react component to clean and display raw SVGs.
 
 [![Travis (Unix) Build Badge](https://img.shields.io/travis/MoOx/react-svg-inline/master.svg?label=unix build)](https://travis-ci.org/MoOx/react-svg-inline)
 
