@@ -15,8 +15,9 @@ const cleanups = {
   width: / +width="\d+(\.\d+)?(px)?"/gi,
   height: / +height="\d+(\.\d+)?(px)?"/gi,
 
-  // remove fill
+  // remove fill and stroke
   fill: / +fill=\"(none|#[0-9a-f]+)\"/gi,
+  stroke: / +stroke=\"(none|#[0-9a-f]+)\"/gi,
 
   // Sketch.app shit
   sketchMSShapeGroup: / +sketch:type=\"MSShapeGroup\"/gi,
@@ -32,6 +33,7 @@ class SVGInline extends Component {
       component,
       svg,
       fill,
+      stroke,
     } = this.props
 
     let cleanup = this.props.cleanup
@@ -63,6 +65,7 @@ class SVGInline extends Component {
     // remove useless props for wrapper
     delete props.svg
     delete props.fill
+    delete props.stroke
     delete props.width
     delete props.height
 
@@ -88,6 +91,11 @@ class SVGInline extends Component {
               (
                 fill
                 ? ` fill="${ fill }"`
+                : ""
+              ) +
+              (
+                stroke
+                ? `stroke="${ stroke }"`
                 : ""
               ) +
               (
