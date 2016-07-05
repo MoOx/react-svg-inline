@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp, react/prop-types */
+
 import test from "ava"
 
 import React, { Component } from "react"
@@ -123,4 +125,30 @@ test("SVGInline: should add height", (t) => {
     result,
     `${ SVGInlineStart } style="height: 1rem;"><g></g></svg></span>`
   )
+})
+
+test("SVGInline: does not pass internal props to component", (t) => {
+  const TestComponent = (props) => {
+    t.not(props.className, undefined)
+    t.is(props.component, undefined)
+    t.is(props.classSuffix, undefined)
+    t.is(props.fill, undefined)
+    t.is(props.cleanup, undefined)
+    t.is(props.cleanupExceptions, undefined)
+
+    return <div className="foo" />
+  }
+
+  ReactDOMServer.renderToStaticMarkup(
+    <SVGInline
+      component={ TestComponent }
+      className="TestSVG"
+      classSuffix="-test"
+      fill="#000000"
+      svg="<svg><g></g></svg>"
+      cleanupExceptions={ [ "fake" ] }
+      cleanup
+    />
+  )
+
 })
