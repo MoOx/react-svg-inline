@@ -32,39 +32,41 @@ class SVGInline extends Component {
       component,
       svg,
       fill,
+      width,
+      classSuffix,
+      cleanupExceptions,
+      ...componentProps,
     } = this.props
 
-    let cleanup = this.props.cleanup
+    let {
+      cleanup,
+      height,
+    } = this.props
+
     if (
       // simple way to enable entire cleanup
       cleanup === true ||
       // passing cleanupExceptions enable cleanup as well
       (
-        this.props.cleanup.length === 0 &&
-        this.props.cleanupExceptions.length > 0
+        cleanup.length === 0 &&
+        cleanupExceptions.length > 0
       )
     ) {
       cleanup = Object.keys(cleanups)
     }
     cleanup = cleanup.filter(
       key => {
-        return !(this.props.cleanupExceptions.indexOf(key) > -1)
+        return !(cleanupExceptions.indexOf(key) > -1)
       }
     )
-
-    const { width } = this.props
-    let { height } = this.props
 
     if (width && height === undefined) {
       height = width
     }
 
-    const props = { ...this.props }
     // remove useless props for wrapper
-    delete props.svg
-    delete props.fill
-    delete props.width
-    delete props.height
+    delete componentProps.cleanup
+    delete componentProps.height
 
     const classes = cx({
       "SVGInline": true,
@@ -73,13 +75,13 @@ class SVGInline extends Component {
     })
     const svgClasses = classes
       .split(" ")
-      .join(this.props.classSuffix + " ") + this.props.classSuffix
+      .join(classSuffix + " ") + classSuffix
 
     return (
       React.createElement(
         component,
         {
-          ...props, // take most props
+          ...componentProps, // take most props
           className: classes,
           dangerouslySetInnerHTML: {
             __html: SVGInline.cleanupSvg(svg, cleanup).replace(
