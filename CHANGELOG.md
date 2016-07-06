@@ -1,3 +1,8 @@
+# 1.2.0 - 2016-07-06
+
+- Added: React ^15.2.0 support (no more warnings)
+  ([#4](https://github.com/MoOx/react-svg-inline/pull/4) - @nason)
+
 # 1.1.0 - 2016-03-14
 
 - Added: compat with react@15
