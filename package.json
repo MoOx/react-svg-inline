@@ -30,6 +30,7 @@
     "babel-preset-stage-1": "^6.5.0",
     "eslint": "^3.19.0",
     "eslint-config-i-am-meticulous": "^6.0.0",
+    "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.10.3",
     "npmpub": "^3.1.0",
     "prop-types": "^15.5.7",
