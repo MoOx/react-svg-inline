@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import cx from "classnames"
 
 // import styles from "./styles"
@@ -21,7 +22,7 @@ const cleanups = {
   // Sketch.app shit
   sketchMSShapeGroup: / +sketch:type=\"MSShapeGroup\"/gi,
   sketchMSPage: / +sketch:type=\"MSPage\"/gi,
-  sketchMSLayerGroup: / +sketch:type=\"MSLayerGroup\"/gi,
+  sketchMSLayerGroup: / +sketch:type=\"MSLayerGroup\"/gi
 }
 
 // @styled(styles)
@@ -35,12 +36,12 @@ class SVGInline extends Component {
       width,
       classSuffix,
       cleanupExceptions,
-      ...componentProps,
+      ...componentProps
     } = this.props
 
     let {
       cleanup,
-      height,
+      height
     } = this.props
 
     if (
@@ -71,7 +72,7 @@ class SVGInline extends Component {
     const classes = cx({
       "SVGInline": true,
       "SVGInline--cleaned": cleanup.length,
-      [className]: className,
+      [className]: className
     })
     const svgClasses = classes
       .split(" ")
@@ -100,8 +101,8 @@ class SVGInline extends Component {
                   "\""
                 : ""
               )
-            ),
-          },
+            )
+          }
         }
       )
     )
@@ -113,24 +114,24 @@ SVGInline.propTypes = {
   classSuffix: PropTypes.string,
   component: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.func,
+    PropTypes.func
   ]),
   svg: PropTypes.string.isRequired,
   fill: PropTypes.string,
   cleanup: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.array,
+    PropTypes.array
   ]),
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
-  height: PropTypes.string,
+  height: PropTypes.string
 }
 
 SVGInline.defaultProps = {
   component: "span",
   classSuffix: "-svg",
   cleanup: [],
-  cleanupExceptions: [],
+  cleanupExceptions: []
 }
 
 SVGInline.cleanupSvg = (svg, cleanup = []) => {
