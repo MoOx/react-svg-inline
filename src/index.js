@@ -36,7 +36,7 @@ class SVGInline extends Component {
       width,
       classSuffix,
       cleanupExceptions,
-      ...componentProps
+      ...componentProps,
     } = this.props
 
     let {
