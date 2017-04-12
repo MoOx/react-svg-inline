@@ -22,7 +22,7 @@ const cleanups = {
   // Sketch.app shit
   sketchMSShapeGroup: / +sketch:type=\"MSShapeGroup\"/gi,
   sketchMSPage: / +sketch:type=\"MSPage\"/gi,
-  sketchMSLayerGroup: / +sketch:type=\"MSLayerGroup\"/gi,
+  sketchMSLayerGroup: / +sketch:type=\"MSLayerGroup\"/gi
 }
 
 // @styled(styles)
@@ -41,7 +41,7 @@ class SVGInline extends Component {
 
     let {
       cleanup,
-      height,
+      height
     } = this.props
 
     if (
@@ -72,7 +72,7 @@ class SVGInline extends Component {
     const classes = cx({
       "SVGInline": true,
       "SVGInline--cleaned": cleanup.length,
-      [className]: className,
+      [className]: className
     })
     const svgClasses = classes
       .split(" ")
@@ -101,8 +101,8 @@ class SVGInline extends Component {
                   "\""
                 : ""
               )
-            ),
-          },
+            )
+          }
         }
       )
     )
@@ -124,14 +124,14 @@ SVGInline.propTypes = {
   ]),
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
-  height: PropTypes.string,
+  height: PropTypes.string
 }
 
 SVGInline.defaultProps = {
   component: "span",
   classSuffix: "-svg",
   cleanup: [],
-  cleanupExceptions: [],
+  cleanupExceptions: []
 }
 
 SVGInline.cleanupSvg = (svg, cleanup = []) => {
