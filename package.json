@@ -40,7 +40,7 @@
     "rimraf": "^2.4.4"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0"
+    "react": "^0.14.0 || ^15.0.0-rc.1"
   },
   "scripts": {
     "prebabelify": "rimraf lib",
@@ -59,7 +59,12 @@
     ]
   },
   "eslintConfig": {
-    "extends": "eslint-config-i-am-meticulous/react"
+    "extends": "eslint-config-i-am-meticulous/react",
+    "rules": {
+      "comma-dangle": ["error", {
+        "objects": "always"
+      }]
+    }
   },
   "ava": {
     "files": [
