@@ -62,7 +62,8 @@
     "extends": "eslint-config-i-am-meticulous/react",
     "rules": {
       "comma-dangle": ["error", {
-        "objects": "ignore"
+        "objects": "ignore",
+        "arrays": "ignore"
       }]
     }
   },

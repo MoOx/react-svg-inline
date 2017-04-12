@@ -100,9 +100,9 @@ class SVGInline extends Component {
                     (height ? `height: ${height};` : "") +
                   "\""
                 : ""
-              ),
+              )
             ),
-          }
+          },
         }
       )
     )
@@ -114,13 +114,13 @@ SVGInline.propTypes = {
   classSuffix: PropTypes.string,
   component: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.func
+    PropTypes.func,
   ]),
   svg: PropTypes.string.isRequired,
   fill: PropTypes.string,
   cleanup: PropTypes.oneOfType([
     PropTypes.bool,
-    PropTypes.array
+    PropTypes.array,
   ]),
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
