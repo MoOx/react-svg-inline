@@ -1,9 +1,9 @@
 /* eslint-disable react/no-multi-comp, react/prop-types */
 
 import test from "ava"
-
-import React, { Component } from "react"
+import React from "react"
 import ReactDOMServer from "react-dom/server"
+
 import SVGInline from ".."
 
 // const result = ?
@@ -37,12 +37,10 @@ test("SVGInline: parent component can be chosen by tagName", (t) => {
 })
 
 test("SVGInline: parent composite component can be chosen", (t) => {
-  class TestComponent extends Component {
-    render() {
-      return (
-        <div {...this.props} className="foo" />
-      )
-    }
+  const TestComponent = (props) => {
+    return (
+      <div {...props} className="foo" />
+    )
   }
 
   const result = ReactDOMServer.renderToStaticMarkup(
