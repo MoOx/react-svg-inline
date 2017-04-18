@@ -123,8 +123,8 @@ SVGInline.propTypes = {
     PropTypes.array,
   ]),
   cleanupExceptions: PropTypes.array,
-  width: PropTypes.string,
-  height: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 }
 
 SVGInline.defaultProps = {
