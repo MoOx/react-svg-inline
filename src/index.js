@@ -45,6 +45,7 @@ class SVGInline extends Component {
       height,
     } = this.props
 
+    // use svg or src prop for svg string
     svg = svg ? svg : src;
 
     if (
