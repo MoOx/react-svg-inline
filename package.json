@@ -34,13 +34,12 @@
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-react": "^6.0.0",
     "npmpub": "^3.1.0",
-    "react": "^15.2.0",
-    "react-addons-test-utils": "^15.2.0",
-    "react-dom": "^15.2.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
     "rimraf": "^2.4.4"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.3.0"
+    "react": "^0.14.9 || ^15.3.0 || ^16.0.0"
   },
   "scripts": {
     "prebabelify": "rimraf lib",
