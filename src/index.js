@@ -34,6 +34,8 @@ class SVGInline extends Component {
       svg,
       fill,
       width,
+      title,
+      id,
       classSuffix,
       cleanupExceptions,
       ...componentProps,
@@ -77,7 +79,33 @@ class SVGInline extends Component {
     const svgClasses = classes
       .split(" ")
       .join(classSuffix + " ") + classSuffix
-
+    let svgStr = SVGInline.cleanupSvg(svg, cleanup)
+      .replace(
+        /<svg/,
+        `<svg class="${ svgClasses }"` +
+        (
+          fill
+          ? ` fill="${ fill }"`
+          : ""
+        ) +
+        (
+          width || height
+          ? " style=\"" +
+              (width ? `width: ${width};` : "") +
+              (height ? `height: ${height};` : "") +
+            "\""
+          : ""
+        )
+      )
+    if(title && id) {
+      const match = /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length - 1
+      svgStr = svgStr.substr(0, pos)
+        + ` aria-labelledby="${id}"`
+        + svgStr.substr(pos, 1)
+        + `<title id="${id}">${title}</title>`
+        + svgStr.substr(pos + 1)
+    }
     return (
       React.createElement(
         component,
@@ -85,23 +113,7 @@ class SVGInline extends Component {
           ...componentProps, // take most props
           className: classes,
           dangerouslySetInnerHTML: {
-            __html: SVGInline.cleanupSvg(svg, cleanup).replace(
-              /<svg/,
-              `<svg class="${ svgClasses }"` +
-              (
-                fill
-                ? ` fill="${ fill }"`
-                : ""
-              ) +
-              (
-                width || height
-                ? " style=\"" +
-                    (width ? `width: ${width};` : "") +
-                    (height ? `height: ${height};` : "") +
-                  "\""
-                : ""
-              )
-            ),
+            __html: svgStr
           },
         }
       )
@@ -125,6 +137,8 @@ SVGInline.propTypes = {
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
   height: PropTypes.string,
+  title: PropTypes.string,
+  id: PropTypes.string,
 }
 
 SVGInline.defaultProps = {
