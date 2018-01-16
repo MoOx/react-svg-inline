@@ -150,3 +150,31 @@ test("SVGInline: does not pass internal props to component", (t) => {
   )
 
 })
+
+test("SVGInline: should not have a title if either title or id props are not provided", (t) => {
+  const resultWithId = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } id="MyTestId" />
+  )
+  t.is(
+    resultWithId,
+    `${ SVGInlineStart }><g></g></svg></span>`
+  )
+
+  const restultWithTitle = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } title="My test title" />
+  )
+  t.is(
+    restultWithTitle,
+    `${ SVGInlineStart }><g></g></svg></span>`
+  )
+})
+
+test("SVGInline: includes title if title and id props are provided", (t) => {
+  const result = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } id="MyTestId" title="My test title" />
+  )
+  t.is(
+    result,
+    `${ SVGInlineStart } aria-labelledby="MyTestId"><title id="MyTestId">My test title</title><g></g></svg></span>`
+  )
+})
