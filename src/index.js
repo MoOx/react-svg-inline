@@ -34,6 +34,8 @@ class SVGInline extends Component {
       svg,
       fill,
       width,
+      title,
+      id,
       classSuffix,
       cleanupExceptions,
       ...componentProps,
@@ -125,6 +127,8 @@ SVGInline.propTypes = {
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
   height: PropTypes.string,
+  title: PropTypes.string,
+  id: PropTypes.string,
 }
 
 SVGInline.defaultProps = {
