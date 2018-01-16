@@ -98,11 +98,8 @@ class SVGInline extends Component {
         )
       )
     if(title && id) {
-      const p = /<svg.*?>/.exec(svgStr)
-      const { index } = p
-      const { length } = p[0]
-      const pos = index + length - 1
-
+      const match = /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length - 1
       svgStr = svgStr.substr(0, pos)
         + ` aria-labelledby="${id}"`
         + svgStr.substr(pos, 1)
