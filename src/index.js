@@ -79,7 +79,36 @@ class SVGInline extends Component {
     const svgClasses = classes
       .split(" ")
       .join(classSuffix + " ") + classSuffix
+    let svgStr = SVGInline.cleanupSvg(svg, cleanup)
+      .replace(
+        /<svg/,
+        `<svg class="${ svgClasses }"` +
+        (
+          fill
+          ? ` fill="${ fill }"`
+          : ""
+        ) +
+        (
+          width || height
+          ? " style=\"" +
+              (width ? `width: ${width};` : "") +
+              (height ? `height: ${height};` : "") +
+            "\""
+          : ""
+        )
+      )
+    if(title && id) {
+      const p = /<svg.*?>/.exec(svgStr)
+      const { index } = p
+      const { length } = p[0]
+      const pos = index + length - 1
 
+      svgStr = svgStr.substr(0, pos)
+        + ` aria-labelledby="${id}"`
+        + svgStr.substr(pos, 1)
+        + `<title id="${id}">${title}</title>`
+        + svgStr.substr(pos + 1)
+    }
     return (
       React.createElement(
         component,
@@ -87,23 +116,7 @@ class SVGInline extends Component {
           ...componentProps, // take most props
           className: classes,
           dangerouslySetInnerHTML: {
-            __html: SVGInline.cleanupSvg(svg, cleanup).replace(
-              /<svg/,
-              `<svg class="${ svgClasses }"` +
-              (
-                fill
-                ? ` fill="${ fill }"`
-                : ""
-              ) +
-              (
-                width || height
-                ? " style=\"" +
-                    (width ? `width: ${width};` : "") +
-                    (height ? `height: ${height};` : "") +
-                  "\""
-                : ""
-              )
-            ),
+            __html: svgStr
           },
         }
       )
