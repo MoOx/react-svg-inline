@@ -35,6 +35,7 @@ class SVGInline extends Component {
       fill,
       width,
       accessibilityLabel,
+      accessibilityDesc,
       classSuffix,
       cleanupExceptions,
       ...componentProps,
@@ -127,6 +128,7 @@ SVGInline.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   accessibilityLabel: PropTypes.string,
+  accessibilityDesc: PropTypes.string,
 }
 
 SVGInline.defaultProps = {
