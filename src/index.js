@@ -79,15 +79,7 @@ class SVGInline extends Component {
     const svgClasses = classes
       .split(" ")
       .join(classSuffix + " ") + classSuffix
-
-    return (
-      React.createElement(
-        component,
-        {
-          ...componentProps, // take most props
-          className: classes,
-          dangerouslySetInnerHTML: {
-            __html: SVGInline.cleanupSvg(svg, cleanup).replace(
+    let svgStr = SVGInline.cleanupSvg(svg, cleanup).replace(
               /<svg/,
               `<svg class="${ svgClasses }"` +
               (
@@ -103,7 +95,15 @@ class SVGInline extends Component {
                   "\""
                 : ""
               )
-            ),
+    )
+    return (
+      React.createElement(
+        component,
+        {
+          ...componentProps, // take most props
+          className: classes,
+          dangerouslySetInnerHTML: {
+            __html: svgStr,
           },
         }
       )
