@@ -80,22 +80,30 @@ class SVGInline extends Component {
       .split(" ")
       .join(classSuffix + " ") + classSuffix
     let svgStr = SVGInline.cleanupSvg(svg, cleanup).replace(
-              /<svg/,
-              `<svg class="${ svgClasses }"` +
-              (
-                fill
-                ? ` fill="${ fill }"`
-                : ""
-              ) +
-              (
-                width || height
-                ? " style=\"" +
-                    (width ? `width: ${width};` : "") +
-                    (height ? `height: ${height};` : "") +
-                  "\""
-                : ""
-              )
+      /<svg/,
+      `<svg class="${ svgClasses }"` +
+      (
+        fill
+        ? ` fill="${ fill }"`
+        : ""
+      ) +
+      (
+        width || height
+        ? " style=\"" +
+            (width ? `width: ${width};` : "") +
+            (height ? `height: ${height};` : "") +
+          "\""
+        : ""
+      )
     )
+    let match
+    if(accessibilityDesc) {
+      match = /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length
+      svgStr = svgStr.substr(0, pos)
+      + `<desc>${accessibilityDesc}</desc>`
+      + svgStr.substr(pos)
+    }
     return (
       React.createElement(
         component,
