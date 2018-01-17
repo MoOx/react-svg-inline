@@ -128,6 +128,18 @@ others.
 
 ``PropTypes.string``
 
+### accessibilityLabel
+
+``PropTypes.string``
+
+This value is added as an svg `<title>` element that is accessible to screen readers.
+
+### accessibilityDesc
+
+``PropTypes.string``
+
+This value is added as an svg `<desc>` element that is accessible to screen readers.
+
 ---
 
 ## CONTRIBUTING
