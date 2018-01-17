@@ -138,6 +138,8 @@ SVGInline.defaultProps = {
   cleanupExceptions: [],
 }
 
+SVGInline.idCount = 0;
+
 SVGInline.cleanupSvg = (svg, cleanup = []) => {
   return Object.keys(cleanups)
     .filter(key => cleanup.indexOf(key) > -1)
