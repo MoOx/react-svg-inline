@@ -104,6 +104,16 @@ class SVGInline extends Component {
       + `<desc>${accessibilityDesc}</desc>`
       + svgStr.substr(pos)
     }
+    if(accessibilityLabel) {
+      match = match || /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length - 1
+      const id = `SVGInline-${SVGInline.idCount++}-title`
+      svgStr = svgStr.substr(0, pos)
+        + ` role="img" aria-labelledby="${id}"`
+        + svgStr.substr(pos, 1)
+        + `<title id="${id}">${accessibilityLabel}</title>`
+        + svgStr.substr(pos + 1)
+    }
     return (
       React.createElement(
         component,
