@@ -133,6 +133,7 @@ others.
 ``PropTypes.string``
 
 This value is added as an svg `<title>` element that is accessible to screen readers.
+(Note: when this option is used, an SVG `id` attribute will be automatically injected).
 
 ### accessibilityDesc
 
