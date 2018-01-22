@@ -1,3 +1,8 @@
+# 2.1.0 - 2018-01-22
+
+- Add `accessibilityLabel` and `accessibilityDesc` props for a11y
+  by @filoxo in [#23](https://github.com/MoOx/react-svg-inline/pull/23)
+
 # 2.0.1 - 2017-10-12
 
 - Add React 16 support,
