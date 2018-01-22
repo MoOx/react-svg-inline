@@ -34,6 +34,8 @@ class SVGInline extends Component {
       svg,
       fill,
       width,
+      accessibilityLabel,
+      accessibilityDesc,
       classSuffix,
       cleanupExceptions,
       ...componentProps,
@@ -77,7 +79,41 @@ class SVGInline extends Component {
     const svgClasses = classes
       .split(" ")
       .join(classSuffix + " ") + classSuffix
-
+    let svgStr = SVGInline.cleanupSvg(svg, cleanup).replace(
+      /<svg/,
+      `<svg class="${ svgClasses }"` +
+      (
+        fill
+        ? ` fill="${ fill }"`
+        : ""
+      ) +
+      (
+        width || height
+        ? " style=\"" +
+            (width ? `width: ${width};` : "") +
+            (height ? `height: ${height};` : "") +
+          "\""
+        : ""
+      )
+    )
+    let match
+    if(accessibilityDesc) {
+      match = /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length
+      svgStr = svgStr.substr(0, pos)
+      + `<desc>${accessibilityDesc}</desc>`
+      + svgStr.substr(pos)
+    }
+    if(accessibilityLabel) {
+      match = match || /<svg.*?>/.exec(svgStr)
+      const pos = match.index + match[0].length - 1
+      const id = `SVGInline-${SVGInline.idCount++}-title`
+      svgStr = svgStr.substr(0, pos)
+        + ` role="img" aria-labelledby="${id}"`
+        + svgStr.substr(pos, 1)
+        + `<title id="${id}">${accessibilityLabel}</title>`
+        + svgStr.substr(pos + 1)
+    }
     return (
       React.createElement(
         component,
@@ -85,23 +121,7 @@ class SVGInline extends Component {
           ...componentProps, // take most props
           className: classes,
           dangerouslySetInnerHTML: {
-            __html: SVGInline.cleanupSvg(svg, cleanup).replace(
-              /<svg/,
-              `<svg class="${ svgClasses }"` +
-              (
-                fill
-                ? ` fill="${ fill }"`
-                : ""
-              ) +
-              (
-                width || height
-                ? " style=\"" +
-                    (width ? `width: ${width};` : "") +
-                    (height ? `height: ${height};` : "") +
-                  "\""
-                : ""
-              )
-            ),
+            __html: svgStr,
           },
         }
       )
@@ -125,6 +145,8 @@ SVGInline.propTypes = {
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
   height: PropTypes.string,
+  accessibilityLabel: PropTypes.string,
+  accessibilityDesc: PropTypes.string,
 }
 
 SVGInline.defaultProps = {
@@ -133,6 +155,8 @@ SVGInline.defaultProps = {
   cleanup: [],
   cleanupExceptions: [],
 }
+
+SVGInline.idCount = 0;
 
 SVGInline.cleanupSvg = (svg, cleanup = []) => {
   return Object.keys(cleanups)

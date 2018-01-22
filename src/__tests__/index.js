@@ -150,3 +150,40 @@ test("SVGInline: does not pass internal props to component", (t) => {
   )
 
 })
+
+test("SVGInline: includes title element if accessibilityLabel is provided", (t) => {
+  const result = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } accessibilityLabel="My test title" />
+  )
+  t.is(
+    result,
+    `${ SVGInlineStart } role="img" aria-labelledby="SVGInline-0-title"><title id="SVGInline-0-title">My test title</title><g></g></svg></span>`
+  )
+})
+
+test("SVGInline: accessibilityLabel IDs are not the same", (t) => {
+  const result1 = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } accessibilityLabel="First test title" />
+  )
+  const result2 = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } accessibilityLabel="Second test title" />
+  )
+  t.is(
+    result1,
+    `${ SVGInlineStart } role="img" aria-labelledby="SVGInline-1-title"><title id="SVGInline-1-title">First test title</title><g></g></svg></span>`
+  )
+  t.is(
+    result2,
+    `${ SVGInlineStart } role="img" aria-labelledby="SVGInline-2-title"><title id="SVGInline-2-title">Second test title</title><g></g></svg></span>`
+  )
+})
+
+test("SVGInline: includes desc element if accessibilityDesc is provided", (t) => {
+  const result = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg><g></g></svg>" } accessibilityDesc="Longer accessibility description of this svg image" />
+  )
+  t.is(
+    result,
+    `${ SVGInlineStart }><desc>Longer accessibility description of this svg image</desc><g></g></svg></span>`
+  )
+})
