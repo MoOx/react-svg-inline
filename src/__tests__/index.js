@@ -187,3 +187,13 @@ test("SVGInline: includes desc element if accessibilityDesc is provided", (t) =>
     `${ SVGInlineStart }><desc>Longer accessibility description of this svg image</desc><g></g></svg></span>`
   )
 })
+
+test("SVGInline: accessibilityLabel doesn't crash on svg tag with newlines", (t) => {
+  const result1 = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={ "<svg \n><g></g></svg>" } accessibilityLabel="Third test title" />
+  )
+  t.is(
+    result1,
+    `${ SVGInlineStart } ${'\n'} role="img" aria-labelledby="SVGInline-3-title"><title id="SVGInline-3-title">Third test title</title><g></g></svg></span>`
+  )
+})
