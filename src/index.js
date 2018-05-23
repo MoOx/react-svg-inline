@@ -98,14 +98,14 @@ class SVGInline extends Component {
     )
     let match
     if(accessibilityDesc) {
-      match = /<svg.*?>/.exec(svgStr)
+      match = /<svg(.|\n|\r\n)*?>/.exec(svgStr)
       const pos = match.index + match[0].length
       svgStr = svgStr.substr(0, pos)
       + `<desc>${accessibilityDesc}</desc>`
       + svgStr.substr(pos)
     }
     if(accessibilityLabel) {
-      match = match || /<svg.*?>/.exec(svgStr)
+      match = match || /<svg(.|\n|\r\n)*?>/.exec(svgStr)
       const pos = match.index + match[0].length - 1
       const id = `SVGInline-${SVGInline.idCount++}-title`
       svgStr = svgStr.substr(0, pos)
