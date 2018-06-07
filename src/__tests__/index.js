@@ -1,4 +1,4 @@
-/* eslint-disable react/no-multi-comp, react/prop-types */
+/* eslint-disable react/no-multi-comp, react/prop-types, react/jsx-no-bind */
 
 import test from "ava"
 import React from "react"

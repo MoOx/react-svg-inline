@@ -17,12 +17,12 @@ const cleanups = {
   height: / +height="\d+(\.\d+)?(px)?"/gi,
 
   // remove fill
-  fill: / +fill=\"(none|#[0-9a-f]+)\"/gi,
+  fill: / +fill="(none|#[0-9a-f]+)"/gi,
 
   // Sketch.app shit
-  sketchMSShapeGroup: / +sketch:type=\"MSShapeGroup\"/gi,
-  sketchMSPage: / +sketch:type=\"MSPage\"/gi,
-  sketchMSLayerGroup: / +sketch:type=\"MSLayerGroup\"/gi,
+  sketchMSShapeGroup: / +sketch:type="MSShapeGroup"/gi,
+  sketchMSPage: / +sketch:type="MSPage"/gi,
+  sketchMSLayerGroup: / +sketch:type="MSLayerGroup"/gi,
 }
 
 // @styled(styles)
@@ -38,7 +38,7 @@ class SVGInline extends Component {
       accessibilityDesc,
       classSuffix,
       cleanupExceptions,
-      ...componentProps,
+      ...componentProps
     } = this.props
 
     let {
