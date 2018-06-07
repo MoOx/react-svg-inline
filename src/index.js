@@ -32,6 +32,7 @@ class SVGInline extends Component {
       className,
       component,
       svg,
+      src,
       fill,
       width,
       accessibilityLabel,
@@ -45,6 +46,9 @@ class SVGInline extends Component {
       cleanup,
       height,
     } = this.props
+
+    // use svg or src prop for svg string
+    svg = svg ? svg : src;
 
     if (
       // simple way to enable entire cleanup
@@ -136,7 +140,8 @@ SVGInline.propTypes = {
     PropTypes.string,
     PropTypes.func,
   ]),
-  svg: PropTypes.string.isRequired,
+  svg: PropTypes.string,
+  src: PropTypes.string,
   fill: PropTypes.string,
   cleanup: PropTypes.oneOfType([
     PropTypes.bool,
