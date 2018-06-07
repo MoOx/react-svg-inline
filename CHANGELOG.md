@@ -1,3 +1,8 @@
+# 2.1.1 - 2018-06-07
+
+- Fix accessibility\* for svgs with newlines
+  by @cmrigney in [#26](https://github.com/MoOx/react-svg-inline/pull/26)
+
 # 2.1.0 - 2018-01-22
 
 - Add `accessibilityLabel` and `accessibilityDesc` props for a11y
@@ -12,7 +17,7 @@
 
 - Fixed: Use `prop-types` package instead of react export to avoid warning with `react@^15.5.0`.
   Released as a major version since react (specified as in “peerDependencies”) needs a stricter range.
- 
+
 # 1.2.0 - 2016-07-06
 
 - Added: React ^15.2.0 support (no more warnings)
