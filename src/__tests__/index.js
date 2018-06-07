@@ -21,6 +21,18 @@ test("SVGInline: passes & merges className", (t) => {
   )
 })
 
+test("SVGInline: skiper outer component classname", (t) => {
+  const result = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline skipOuterClass className="TestSVG" svg="<svg><g></g></svg>" />
+  )
+  t.is(
+    result,
+    "<span class=\"\"><svg class=\"SVGInline-svg "+
+      "TestSVG-svg\"" +
+    "><g></g></svg></span>"
+  )
+})
+
 test("SVGInline: parent component can be chosen by tagName", (t) => {
   const result = ReactDOMServer.renderToStaticMarkup(
     <SVGInline

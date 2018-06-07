@@ -119,7 +119,7 @@ class SVGInline extends Component {
         component,
         {
           ...componentProps, // take most props
-          className: classes,
+          className: componentProps.skipOuterClass ? "" : classes,
           dangerouslySetInnerHTML: {
             __html: svgStr,
           },
