@@ -32,7 +32,10 @@
     "eslint": "^4.19.1",
     "eslint-config-i-am-meticulous": "^9.0.1",
     "eslint-plugin-react": "^7.9.1",
+    "husky": "^0.14.3",
     "npmpub": "^3.1.0",
+    "prettier": "^1.13.4",
+    "pretty-quick": "^1.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "rimraf": "^2.4.4"
@@ -41,6 +44,7 @@
     "react": "^0.14.9 || ^15.3.0 || ^16.0.0"
   },
   "scripts": {
+    "precommit": "pretty-quick --staged",
     "prebabelify": "rimraf lib",
     "babelify": "babel --copy-files src --out-dir lib",
     "prepublish": "npm run babelify",
