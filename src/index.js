@@ -34,6 +34,7 @@ class SVGInline extends Component {
       svg,
       fill,
       width,
+      focusable,
       accessibilityLabel,
       accessibilityDesc,
       classSuffix,
@@ -78,7 +79,8 @@ class SVGInline extends Component {
             (width ? `width: ${width};` : "") +
             (height ? `height: ${height};` : "") +
             '"'
-          : "")
+          : "") +
+        (focusable ? ` focusable="${focusable}"` : "")
     );
     let match;
     if (accessibilityDesc) {
@@ -120,6 +122,7 @@ SVGInline.propTypes = {
   cleanupExceptions: PropTypes.array,
   width: PropTypes.string,
   height: PropTypes.string,
+  focusable: PropTypes.string,
   accessibilityLabel: PropTypes.string,
   accessibilityDesc: PropTypes.string
 };

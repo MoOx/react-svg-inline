@@ -111,6 +111,13 @@ test("SVGInline: should add height", t => {
   t.is(result, `${SVGInlineStart} style="height: 1rem;"><g></g></svg></span>`);
 });
 
+test("SVGInline: should add focusable", t => {
+  const result = ReactDOMServer.renderToStaticMarkup(
+    <SVGInline svg={"<svg><g></g></svg>"} focusable="false" />
+  );
+  t.is(result, `${SVGInlineStart} focusable="false"><g></g></svg></span>`);
+});
+
 test("SVGInline: does not pass internal props to component", t => {
   const TestComponent = props => {
     t.not(props.className, undefined);
