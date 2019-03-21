@@ -1,3 +1,7 @@
+# DEPRECATED, I recommend you the tool [SVGR](https://github.com/smooth-code/svgr)
+
+---
+
 # react-svg-inline
 
 [![Travis (Unix) Build Badge](https://img.shields.io/travis/MoOx/react-svg-inline/master.svg?label=unix+build)](https://travis-ci.org/MoOx/react-svg-inline)
